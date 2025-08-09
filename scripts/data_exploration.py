@@ -5,6 +5,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from ydata_profiling import ProfileReport
 
+import os
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Download the CIFAR-10 dataset from TensorFlow Datasets
 (X_train, y_train), (X_test, y_test) = tf.keras.datasets.cifar10.load_data()
 # Class names for CIFAR-10 dataset
@@ -37,3 +41,10 @@ plt.xticks(ticks=np.arange(10), labels=class_names, rotation=45)
 plt.savefig('../results/cifar10_label_distribution.png')
 plt.show()
 
+# Generate a profile report for the label distribution
+PROJECT_DIR = os.path.dirname(os.path.dirname(CURRENT_DIR))
+
+df_labels = pd.DataFrame(y_train, columns=['Label'])
+df_labels['Class'] = df_labels['Label'].map(dict(enumerate(class_names)))
+profile = ProfileReport(df_labels, title="CIFAR-10 Label Distribution")
+profile.to_file(f'{PROJECT_DIR}/results/eda_report.html')
