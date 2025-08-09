@@ -38,7 +38,7 @@
 
    ## Progress
    - [x] Project setup and initial structure
-   - [ ] Data exploration
+   - [x] Data exploration: visualize some images, visualize distribution of classes, ydata-profiling report
    - [ ] Data preprocessing
    - [ ] Model training
    - [ ] API deployment
